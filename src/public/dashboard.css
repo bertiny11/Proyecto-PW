@@ -1,0 +1,361 @@
+:root {
+    --primary-color: #2c3e50; /* Azul oscuro elegante */
+    --accent-color: #27ae60;  /* Verde para el "Loop" / Eco */
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-color: #333;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-card {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.logo h1 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
+.logo span {
+    color: var(--accent-color);
+}
+
+.logo p {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 1.2rem;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #1a252f;
+}
+
+.footer-links {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+}
+
+.footer-links a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+
+
+/* Estilos para el menú de navegación en el listado */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+.btn-secondary {
+    background: none;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-secondary:hover {
+    background: #f0f0f0;
+}
+
+/* Asegurar que el contenedor no esté centrado verticalmente como el login */
+body {
+    align-items: flex-start; /* Cambiado de 'center' para permitir scroll */
+    padding-top: 2rem;
+}
+
+
+
+/* Ajuste para contenedores de listado */
+.main-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    align-self: flex-start; /* Evita el centrado vertical del body en el listado */
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Sistema de Rejilla (Grid) */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.book-card-item {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+}
+
+.book-card-item:hover {
+    transform: translateY(-5px);
+}
+
+.book-info h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--primary-color);
+}
+
+.author { color: #555; font-style: italic; margin-bottom: 0.2rem; }
+.isbn { font-size: 0.8rem; color: #888; margin-bottom: 1rem; }
+
+/* Badges de disponibilidad (E-R coherencia) */
+.badge {
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.available { background: #e8f5e9; color: var(--accent-color); }
+.borrowed { background: #ffebee; color: #e74c3c; }
+
+.btn-action {
+    width: 100%;
+    padding: 0.6rem;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-action.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.filters-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-bar {
+    flex-grow: 2;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+
+/* =========================================
+   ESTILOS DE LOS DASHBOARDS (USUARIO Y ADMIN)
+   ========================================= */
+
+/* Diseño general de las secciones (tarjetas blancas) */
+.dashboard-section {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.dashboard-section h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+/* Tablas genéricas dentro de los dashboards */
+.dashboard-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.dashboard-section th, .dashboard-section td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.dashboard-section th {
+    color: var(--primary-color);
+}
+
+/* Nueva clase para poner elementos en dos columnas */
+.grid-dos-columnas {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Divide el espacio en dos partes iguales */
+    gap: 2rem;                      /* Espacio de separación entre las cajas */
+    align-items: start;
+    margin-top: 1rem;
+}
+
+/* -------- ESPECÍFICO: PANEL DE USUARIO -------- */
+.dashboard-grid-user {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.dashboard-grid-user .dashboard-section h2 {
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 0.5rem;
+}
+
+.action-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.action-link.danger { color: #e74c3c; }
+.action-link.disabled { color: #ccc; cursor: not-allowed; }
+
+/* -------- ESPECÍFICO: PANEL DE ADMIN -------- */
+.dashboard-grid-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.dashboard-grid-admin .dashboard-section {
+    border-left: 4px solid var(--primary-color); /* Borde lateral para el admin */
+}
+
+.dashboard-grid-admin .dashboard-section h2 {
+    font-size: 1.2rem;
+}
+
+.dashboard-grid-admin th {
+    color: #555;
+    background-color: #f9f9f9; /* Cabecera de tabla diferente para admin */
+}
+
+.btn-small {
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.btn-danger { background: #fee2e2; color: #b91c1c; }
+.btn-warning { background: #fef08a; color: #854d0e; }
+
+/* --- ADICIONES PARA DASHBOARDS (NO AFECTA AL LOGIN) --- */
+
+/* Contenedor para alinear Título y Botones */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Agrupador de botones (Ver Catálogo + Subir) */
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* Ajuste para que el Dashboard no se quede "pegado" arriba */
+.main-container {
+    padding: 20px 0;
+}
+
+/* Estilos de las cajas del Dashboard */
+.dashboard-section {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 1rem;
+}
+
+/* Cuadrículas */
+.dashboard-grid-user { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+.dashboard-grid-admin { display: flex; flex-direction: column; gap: 2rem; }
+
+/* Forzar que el cuerpo permita scroll en los dashboards */
+body { height: auto !important; min-height: 100vh; align-items: flex-start !important; }

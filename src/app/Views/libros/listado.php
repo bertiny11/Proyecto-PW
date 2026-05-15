@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>BookLoop - Catálogo</title>
-    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('listado.css') ?>">
 </head>
 <body>
 
