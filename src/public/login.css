@@ -1,0 +1,126 @@
+/* login.css - Estilos para BookLoop */
+
+:root {
+    --primary-blue: #2c3e50;
+    --primary-green: #27ae60;
+    --bg-gray: #f4f6f9;
+    --text-dark: #333;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-gray);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor principal del Login */
+.login-container {
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Estilo del Logo */
+.logo h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-blue);
+}
+
+.logo h1 span {
+    color: var(--primary-green);
+}
+
+.logo p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+/* Estilos del Formulario */
+.form-group {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--primary-blue);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    box-sizing: border-box; /* Para que el padding no ensanche el input */
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-green);
+}
+
+/* Botón de acción (Mismo estilo que tus Dashboards) */
+.btn-action {
+    width: 100%;
+    background-color: var(--primary-green);
+    color: white;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-action:hover {
+    background-color: #219150;
+    transform: translateY(-2px);
+}
+
+.btn-action:active {
+    transform: translateY(0);
+}
+
+/* Mensajes de error (si fallan las credenciales) */
+.error-msg {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    border: 1px solid #f5c2c7;
+}
+
+/* Enlaces adicionales */
+.form-footer-links {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.form-footer-links a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.form-footer-links a:hover {
+    color: var(--primary-blue);
+    text-decoration: underline;
+}

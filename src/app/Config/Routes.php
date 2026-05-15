@@ -12,3 +12,5 @@ $routes->get('/', 'Home::index');
 $routes->get('/login', 'Login::index');
 $routes->post('/login/procesar', 'Login::procesar');
 $routes->get('/logout', 'Login::logout');
+
+$routes->get('/libros/listado', 'Libros::index');
