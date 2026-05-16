@@ -13,14 +13,6 @@ class Home extends BaseController
             return redirect()->to('/login');
         }
 
-        // Leemos el rol del usuario desde la sesión
-        $rol = $session->get('rol');
-
-        // Redirigimos al panel correspondiente
-        if ($rol === 'Administrador') {
-            return view('dashboard_admin');
-        } else {
-            return view('dashboard_usuario');
-        }
+        return view(vista_dashboard_por_rol(rol_actual()));
     }
 }

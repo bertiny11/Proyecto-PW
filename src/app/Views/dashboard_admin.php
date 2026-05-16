@@ -15,7 +15,9 @@
                 <p style="margin: 0; font-size: 0.8rem; font-weight: bold;">Panel de Control: Administrador | Hola, <?= session()->get('nombre') ?></p>
             </div>
             <nav class="nav-menu">
-                <a href="#" class="nav-link">Estadísticas Globales</a>
+                <?php if (tiene_permiso('ver_estadisticas_globales')): ?>
+                    <a href="#" class="nav-link">Estadísticas Globales</a>
+                <?php endif; ?>
                 <a href="<?= base_url('/logout') ?>" class="btn-secondary" style="text-decoration: none; display: inline-block;">Cerrar Sesión</a>
             </nav>
         </header>
@@ -24,7 +26,9 @@
             <div class="dashboard-section" style="border-left-color: #8b5cf6;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h2>Gestión de Usuarios</h2>
-                    <button class="btn-action" style="width: auto; padding: 0.4rem 1rem; font-size: 0.85rem; background-color: #8b5cf6;">+ Crear Administrador</button>
+                    <?php if (tiene_permiso('crear_administrador')): ?>
+                        <button class="btn-action" style="width: auto; padding: 0.4rem 1rem; font-size: 0.85rem; background-color: #8b5cf6;">+ Crear Administrador</button>
+                    <?php endif; ?>
                 </div>
                 <table>
                     <thead>
@@ -40,7 +44,14 @@
                             <td>carlos.ruiz@uca.es</td>
                             <td><span class="badge" style="background:#e0e7ff; color:#3730a3;">Usuario</span></td>
                             <td>
-                                <button class="btn-small btn-warning">Hacer Admin</button> <button class="btn-small btn-danger">Banear</button> </td>
+                                <?php if (tiene_permiso('gestionar_usuarios')): ?>
+                                    <button class="btn-small btn-warning">Hacer Admin</button> 
+                                <?php endif; ?>
+
+                                <?php if (tiene_permiso('banear_usuarios')): ?>
+                                    <button class="btn-small btn-danger">Banear</button> 
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     </tbody>
                     <tbody>
@@ -49,7 +60,15 @@
                             <td>marcos.fuentes@uca.es</td>
                             <td><span class="badge" style="background:#e0e7ff; color:#3730a3;">Usuario</span></td>
                             <td>
-                                <button class="btn-small btn-warning">Hacer Admin</button> <button class="btn-small btn-danger">Banear</button> </td>
+                                <?php if (tiene_permiso('gestionar_usuarios')): ?>
+                                    <button class="btn-small btn-warning">Hacer Admin</button> 
+                                <?php endif; ?>
+
+                                <?php if (tiene_permiso('banear_usuarios')): ?>
+                                    <button class="btn-small btn-danger">Banear</button> 
+                                <?php endif; ?>
+                            </td>
+
                         </tr>
                     </tbody>
                 </table>
@@ -60,8 +79,13 @@
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h2>Moderación de Contenido</h2>
                     <div class="button-group">
-                        <a href="<?= base_url('/libros/listado') ?>" class="nav-link">Catálogo</a>
-                        <button class="btn-action" style="padding: 0.4rem 1rem; font-size: 0.85rem; background-color: #8b5cf6;">+ Subir Libro</button>
+                        <?php if (tiene_permiso('ver_catalogo')): ?>
+                            <a href="<?= base_url('/libros/listado') ?>" class="nav-link">Catálogo</a>
+                        <?php endif; ?>
+
+                        <?php if (tiene_permiso('crear_libro')): ?>
+                            <button class="btn-action" style="padding: 0.4rem 1rem; font-size: 0.85rem; background-color: #8b5cf6;">+ Subir Libro</button>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <table>
@@ -76,12 +100,21 @@
                         <tr>
                             <td>Libro: "El Quijote"</td>
                             <td>Reporte de falsificación</td>
-                            <td><button class="btn-small btn-danger">Eliminar Libro</button></td> 
+                            <td>
+                                <?php if (tiene_permiso('eliminar_cualquier_libro')): ?>
+                                    <button class="btn-small btn-danger">Eliminar Libro</button> 
+                                <?php endif; ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>Libro: "Física Cuántica"</td>
                             <td>ISBN Incorrecto</td>
-                            <td><button class="btn-small" style="background:#e5e7eb;">Editar Libro</button></td> </tr>
+                            <td>
+                                <?php if (tiene_permiso('editar_cualquier_libro')): ?>
+                                    <button class="btn-small" style="background:#e5e7eb;">Editar Libro</button>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -100,7 +133,11 @@
                     <tbody>
                         <tr>
                             <td>ID 4052</td>
-                            <td><button class="btn-small btn-warning">Forzar Devolución</button></td>
+                            <td>
+                                <?php if(tiene_permiso('forzar_devoluciones')): ?>
+                                    <button class="btn-small btn-warning">Forzar Devolución</button>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

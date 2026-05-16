@@ -12,7 +12,7 @@
         <div class="nav-links">
             <a href="#">Inicio</a>
             <button class="btn-outline">Mi Perfil</button>
-            <?php if (session()->get('role') == 'admin'): ?>
+            <?php if (session()->get('rol') == 'admin'): ?>
                 <button class="btn-dark">Subir Libro</button>
             <?php endif; ?>
         </div>
@@ -38,11 +38,11 @@
                     </span>
 
                     <div class="admin-actions">
-                        <?php if (session()->get('role') == 'usuario'): ?>
+                        <?php if (session()->get('rol') == 'usuario'): ?>
                             <button class="btn-action">Solicitar Préstamo</button>
                         <?php endif; ?>
 
-                        <?php if (session()->get('role') == 'admin'): ?>
+                        <?php if (session()->get('rol') == 'admin'): ?>
                             <a href="#" class="btn-edit">Editar</a>
                             <a href="#" class="btn-delete">Eliminar</a>
                         <?php endif; ?>

@@ -15,8 +15,14 @@
                 <p style="margin: 0; font-size: 0.8rem;">Modo: Usuario Estándar | Hola, <?= session()->get('nombre') ?></p>
             </div>
             <nav class="nav-menu">
-                <a href="<?= base_url('/libros/listado') ?>" class="nav-link">Catálogo</a>
-                <a href="#" class="nav-link">Mi Perfil</a>
+                <?php if (tiene_permiso('ver_catalogo')):?>
+                    <a href="<?= base_url('/libros/listado') ?>" class="nav-link">Catálogo</a>
+                <?php endif; ?>
+                
+                <?php if (tiene_permiso('ver_mi_perfil')):?>
+                    <a href="#" class="nav-link">Mi Perfil</a>
+                <?php endif; ?>
+
                 <a href="<?= base_url('/logout') ?>" class="btn-secondary" style="text-decoration: none; display: inline-block;">Cerrar Sesión</a>
             </nav>
         </header>
@@ -25,7 +31,9 @@
             <div class="dashboard-section">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h2>Mis Libros Subidos</h2>
-                    <button class="btn-action" style="width: auto; padding: 0.4rem 1rem; font-size: 0.85rem;">+ Subir Libro</button> </div>
+                        <?php if (tiene_permiso('crear_libro')):?>
+                            <button class="btn-action" style="width: auto; padding: 0.4rem 1rem; font-size: 0.85rem;">+ Subir Libro</button> </div>
+                        <?php endif; ?>
                 <table>
                     <thead>
                         <tr>
@@ -39,7 +47,14 @@
                             <td>Patrones de Diseño</td>
                             <td><span class="badge available">En mi poder</span></td>
                             <td>
-                                <a class="action-link">Editar</a> <a class="action-link danger">Borrar</a> </td>
+                                <?php if (tiene_permiso('editar_libro_propio')):?>
+                                    <a class="action-link">Editar</a>
+                                <?php endif; ?>
+
+                                <?php if (tiene_permiso('eliminar_libro_propio')):?>
+                                    <a class="action-link danger">Borrar</a> 
+                                <?php endif; ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>Código Limpio</td>
@@ -64,7 +79,12 @@
                     <tbody>
                         <tr>
                             <td>Redes de Computadoras</td>
-                            <td><button class="btn-secondary" style="padding: 0.3rem; font-size: 0.75rem;">Marcar Devuelto</button></td> </tr>
+                            <td>
+                                <?php if (tiene_permiso('devolver_prestamo_propio')):?>
+                                    <button class="btn-secondary" style="padding: 0.3rem; font-size: 0.75rem;">Marcar Devuelto</button>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <br>
@@ -73,7 +93,12 @@
                     <tbody>
                         <tr>
                             <td>"Bases de Datos" por Ana</td>
-                            <td><button class="btn-action" style="padding: 0.3rem; font-size: 0.75rem;">Aceptar</button></td> </tr>
+                            <td>
+                                <?php if (tiene_permiso('aceptar_solicitudes_propias')):?>
+                                    <button class="btn-action" style="padding: 0.3rem; font-size: 0.75rem;">Aceptar</button>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

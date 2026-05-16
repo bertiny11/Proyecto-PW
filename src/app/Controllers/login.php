@@ -9,6 +9,10 @@ class Login extends BaseController
     // Esta función solo dibuja el HTML que creamos en el Paso 4
     public function index()
     {
+        if (session()->get('logged_in')){
+            return redirect()->to(ruta_inicio_por_rol(session()->get('rol')));
+        }
+
         return view('login');
     }
 
@@ -40,7 +44,7 @@ class Login extends BaseController
                 $session->set($datosSesion);
 
                 // Lo enviamos a la página principal de la biblioteca
-                return redirect()->to('/'); 
+                return redirect()->to(ruta_inicio_por_rol($usuario['Rol'])); 
 
             } else {
                 // Contraseña incorrecta
