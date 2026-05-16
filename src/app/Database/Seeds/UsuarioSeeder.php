@@ -25,6 +25,14 @@ class UsuarioSeeder extends Seeder
                 'Contrasena'      => password_hash('123456', PASSWORD_DEFAULT),
                 'Rol'             => 'Usuario',
                 'Ubicacion'       => 'Cádiz'
+            ],
+            // NUEVO USUARIO AÑADIDO (Tomará automáticamente el ID: 3)
+            [
+                'Nombre_Apellido' => 'Carlos Gómez',
+                'Email'           => 'carlos@correo.com',
+                'Contrasena'      => password_hash('123456', PASSWORD_DEFAULT),
+                'Rol'             => 'Usuario',
+                'Ubicacion'       => 'Jerez'
             ]
         ];
 

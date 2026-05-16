@@ -75,16 +75,16 @@
             </div>
 
         <div class="grid-dos-columnas">
-                <div class="dashboard-section" style="border-left-color: #8b5cf6;">
+            <div class="dashboard-section" style="border-left-color: #8b5cf6;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h2>Moderación de Contenido</h2>
                     <div class="button-group">
                         <?php if (tiene_permiso('ver_catalogo')): ?>
-                            <a href="<?= base_url('/libros/listado') ?>" class="nav-link">Catálogo</a>
+                            <a href="<?= base_url('libros/listado') ?>" class="nav-link">Catálogo</a>
                         <?php endif; ?>
 
                         <?php if (tiene_permiso('crear_libro')): ?>
-                            <button class="btn-action" style="padding: 0.4rem 1rem; font-size: 0.85rem; background-color: #8b5cf6;">+ Subir Libro</button>
+                            <a href="<?= base_url('libros/crear') ?>" class="btn-action" style="text-decoration: none; display: inline-block; padding: 0.4rem 1rem; font-size: 0.85rem; background-color: #8b5cf6; color: white; text-align: center;">+ Subir Libro</a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                             <td>Reporte de falsificación</td>
                             <td>
                                 <?php if (tiene_permiso('eliminar_cualquier_libro')): ?>
-                                    <button class="btn-small btn-danger">Eliminar Libro</button> 
+                                    <a href="<?= base_url('libros/borrar/1') ?>" class="btn-small btn-danger" style="text-decoration: none; display: inline-block;" onclick="return confirm('¿Eliminar este libro de forma definitiva?')">Eliminar Libro</a> 
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -111,7 +111,7 @@
                             <td>ISBN Incorrecto</td>
                             <td>
                                 <?php if (tiene_permiso('editar_cualquier_libro')): ?>
-                                    <button class="btn-small" style="background:#e5e7eb;">Editar Libro</button>
+                                    <a href="<?= base_url('libros/editar/2') ?>" class="btn-small" style="background:#e5e7eb; text-decoration: none; display: inline-block; color: #333;">Editar Libro</a>
                                 <?php endif; ?>
                             </td>
                         </tr>

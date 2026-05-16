@@ -13,7 +13,7 @@ class LibroModel extends Model
     protected $primaryKey       = 'id_libro';
 
     // 3. (MUY IMPORTANTE) Los campos que CodeIgniter tiene permiso para modificar
-    protected $allowedFields = ['titulo', 'autor', 'isbn', 'estado', 'disponibilidad'];
+    protected $allowedFields = ['titulo', 'autor', 'isbn', 'estado', 'disponibilidad', 'id_propietario'];
 
     // (Opcional) Si quieres que CodeIgniter maneje automáticamente las fechas de creación
     protected $useTimestamps    = true;

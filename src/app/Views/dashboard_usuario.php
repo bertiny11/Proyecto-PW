@@ -16,7 +16,7 @@
             </div>
             <nav class="nav-menu">
                 <?php if (tiene_permiso('ver_catalogo')):?>
-                    <a href="<?= base_url('/libros/listado') ?>" class="nav-link">Catálogo</a>
+                    <a href="<?= base_url('libros/listado') ?>" class="nav-link">Catálogo</a>
                 <?php endif; ?>
                 
                 <?php if (tiene_permiso('ver_mi_perfil')):?>
@@ -29,11 +29,12 @@
 
         <div class="dashboard-grid-user">
             <div class="dashboard-section">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                     <h2>Mis Libros Subidos</h2>
-                        <?php if (tiene_permiso('crear_libro')):?>
-                            <button class="btn-action" style="width: auto; padding: 0.4rem 1rem; font-size: 0.85rem;">+ Subir Libro</button> </div>
-                        <?php endif; ?>
+                    <?php if (tiene_permiso('crear_libro')):?>
+                        <a href="<?= base_url('libros/crear') ?>" class="btn-action" style="text-decoration: none; display: inline-block; width: auto; padding: 0.4rem 1rem; font-size: 0.85rem; text-align: center; color: white;">+ Subir Libro</a>
+                    <?php endif; ?>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -43,26 +44,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Patrones de Diseño</td>
-                            <td><span class="badge available">En mi poder</span></td>
-                            <td>
-                                <?php if (tiene_permiso('editar_libro_propio')):?>
-                                    <a class="action-link">Editar</a>
-                                <?php endif; ?>
+                        <?php if (!empty($libros_propios) && is_array($libros_propios)): ?>
+                            <?php foreach ($libros_propios as $libro): ?>
+                                <tr>
+                                    <td><?= esc($libro['titulo']) ?></td>
+                                    <td>
+                                        <?php if ($libro['disponibilidad'] === 'Disponible' || $libro['disponibilidad'] == 1): ?>
+                                            <span class="badge available">En mi poder</span>
+                                        <?php else: ?>
+                                            <span class="badge borrowed">Prestado</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if (tiene_permiso('editar_libro_propio')):?>
+                                            <a href="<?= base_url('libros/editar/' . $libro['id_libro']) ?>" class="action-link">Editar</a>
+                                        <?php endif; ?>
 
-                                <?php if (tiene_permiso('eliminar_libro_propio')):?>
-                                    <a class="action-link danger">Borrar</a> 
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Código Limpio</td>
-                            <td><span class="badge borrowed">Prestado a Luis</span></td>
-                            <td>
-                                <a class="action-link">Editar</a>
-                                <span class="action-link disabled" title="No puedes borrar un libro prestado">Borrar</span> </td>
-                        </tr>
+                                        <?php if (tiene_permiso('eliminar_libro_propio')):?>
+                                            <?php if ($libro['disponibilidad'] === 'Disponible' || $libro['disponibilidad'] == 1): ?>
+                                                <a href="<?= base_url('libros/borrar/' . $libro['id_libro']) ?>" class="action-link danger" onclick="return confirm('¿Deseas retirar este libro del catálogo de BookLoop?')">Borrar</a> 
+                                            <?php else: ?>
+                                                <span class="action-link disabled" title="No puedes borrar un libro que está prestado actualmente">Borrar</span>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="3" style="text-align: center; color: #9ca3af; padding: 2rem 0;">
+                                    Aún no has incorporado ningún libro a tu catálogo particular.
+                                </td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
