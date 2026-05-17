@@ -31,4 +31,15 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) {
     $routes->get('libros/editar/(:num)', 'Libros::editar/$1');
     $routes->post('libros/actualizar/(:num)', 'Libros::actualizar/$1');
     $routes->get('libros/borrar/(:num)', 'Libros::borrar/$1');
+
+    // Préstamos
+    $routes->get('/prestamos/solicitar/(:num)', 'Prestamos::solicitar/$1');
+    $routes->get('/prestamos/aceptar/(:num)', 'Prestamos::aceptar/$1');
+    $routes->get('/prestamos/devolver/(:num)', 'Prestamos::devolver/$1');
+    $routes->get('/prestamos/forzar-devolucion/(:num)', 'Prestamos::forzarDevolucion/$1', ['filter' => 'rol:Administrador']);
+
+    // Usuarios 
+    $routes->get('/usuarios/hacer-admin/(:num)', 'Usuarios::hacerAdmin/$1', ['filter' => 'rol:Administrador']);
+    $routes->get('/usuarios/banear/(:num)', 'Usuarios::banear/$1', ['filter' => 'rol:Administrador']);
+    $routes->get('/usuarios/desbanear/(:num)', 'Usuarios::desbanear/$1', ['filter' => 'rol:Administrador']);
 });

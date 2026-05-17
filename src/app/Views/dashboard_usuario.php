@@ -87,32 +87,65 @@
                     <thead>
                         <tr>
                             <th>Libro Solicitado</th>
+                            <th>Estado</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Redes de Computadoras</td>
-                            <td>
-                                <?php if (tiene_permiso('devolver_prestamo_propio')):?>
-                                    <button class="btn-secondary" style="padding: 0.3rem; font-size: 0.75rem;">Marcar Devuelto</button>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
+                        <?php if (!empty($mis_prestamos)): ?>
+                            <?php foreach ($mis_prestamos as $prestamo): ?>
+                                <tr>
+                                    <td><?= esc($prestamo['titulo']) ?></td>
+                                    <td><?= esc($prestamo['estado_prestamo']) ?></td>
+                                    <td>
+                                        <?php if (tiene_permiso('devolver_prestamo_propio') && $prestamo['estado_prestamo'] === 'Activo'): ?>
+                                            <a href="<?= base_url('prestamos/devolver/' . $prestamo['id_prestamo']) ?>"class="btn-secondary"style="padding: 0.3rem; font-size: 0.75rem; text-decoration:none;"
+                                            onclick="return confirm('¿Confirmas que has devuelto este libro?')"> Marcar Devuelto
+                                            </a>
+                                        <?php else: ?>
+                                            <span class="badge borrowed">Pendiente</span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="3">No tienes préstamos activos.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
                 <br>
+
                 <h2>Mis Solicitudes Recibidas</h2>
                 <table>
-                    <tbody>
+                    <thead>
                         <tr>
-                            <td>"Bases de Datos" por Ana</td>
-                            <td>
-                                <?php if (tiene_permiso('aceptar_solicitudes_propias')):?>
-                                    <button class="btn-action" style="padding: 0.3rem; font-size: 0.75rem;">Aceptar</button>
-                                <?php endif; ?>
-                            </td>
+                            <th>Libro</th>
+                            <th>Solicitante</th>
+                            <th>Acción</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($solicitudes_recibidas)): ?>
+                            <?php foreach ($solicitudes_recibidas as $solicitud): ?>
+                                <tr>
+                                    <td><?= esc($solicitud['titulo']) ?></td>
+                                    <td><?= esc($solicitud['nombre_prestatario']) ?></td>
+                                    <td>
+                                        <?php if (tiene_permiso('aceptar_solicitudes_propias')): ?>
+                                            <a href="<?= base_url('prestamos/aceptar/' . $solicitud['id_prestamo']) ?>"class="btn-action"style="padding: 0.3rem; font-size: 0.75rem; text-decoration:none; color:white;"
+                                            onclick="return confirm('¿Aceptar esta solicitud de préstamo?')"> Aceptar
+                                            </a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="3">No tienes solicitudes pendientes.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>

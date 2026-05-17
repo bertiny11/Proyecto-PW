@@ -16,7 +16,7 @@
             </div>
             <nav class="nav-menu">
                 <?php if (tiene_permiso('ver_estadisticas_globales')): ?>
-                    <a href="#" class="nav-link">Estadísticas Globales</a>
+                    <a href="#" class="nav-link">Estadísticas Globales</a>   
                 <?php endif; ?>
                 <a href="<?= base_url('/logout') ?>" class="btn-secondary" style="text-decoration: none; display: inline-block;">Cerrar Sesión</a>
             </nav>
@@ -34,42 +34,48 @@
                     <thead>
                         <tr>
                             <th>Nombre Completo</th>
-                            <th>Email Privado</th> <th>Rol Actual</th>
+                            <th>Email Privado</th>
+                            <th>Rol Actual</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Carlos Ruiz</td>
-                            <td>carlos.ruiz@uca.es</td>
-                            <td><span class="badge" style="background:#e0e7ff; color:#3730a3;">Usuario</span></td>
-                            <td>
-                                <?php if (tiene_permiso('gestionar_usuarios')): ?>
-                                    <button class="btn-small btn-warning">Hacer Admin</button> 
-                                <?php endif; ?>
+                        <?php if (!empty($usuarios)): ?>
+                            <?php foreach ($usuarios as $usuario): ?>
+                                <tr>
+                                    <td><?= esc($usuario['Nombre_Apellido']) ?></td>
+                                    <td><?= esc($usuario['Email']) ?></td>
+                                    <td>
+                                        <span class="badge" style="background:#e0e7ff; color:#3730a3;"> <?= esc($usuario['Rol']) ?> </span>
+                                    </td>
+                                    <td>
+                                        <?= esc($usuario['Estado_Usuario'] ?? 'Activo') ?>
+                                    </td>
+                                    <td>
+                                        <?php if (tiene_permiso('gestionar_usuarios') && $usuario['Rol'] !== 'Administrador'): ?>
+                                            <a href="<?= base_url('usuarios/hacer-admin/' . $usuario['ID_Usuario']) ?>" class="btn-small btn-warning" style="text-decoration:none;"
+                                                onclick="return confirm('¿Convertir este usuario en administrador?')"> Hacer Admin
+                                            </a>
+                                        <?php endif; ?>
 
-                                <?php if (tiene_permiso('banear_usuarios')): ?>
-                                    <button class="btn-small btn-danger">Banear</button> 
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td>Marcos Fuentes</td>
-                            <td>marcos.fuentes@uca.es</td>
-                            <td><span class="badge" style="background:#e0e7ff; color:#3730a3;">Usuario</span></td>
-                            <td>
-                                <?php if (tiene_permiso('gestionar_usuarios')): ?>
-                                    <button class="btn-small btn-warning">Hacer Admin</button> 
-                                <?php endif; ?>
-
-                                <?php if (tiene_permiso('banear_usuarios')): ?>
-                                    <button class="btn-small btn-danger">Banear</button> 
-                                <?php endif; ?>
-                            </td>
-
-                        </tr>
+                                        <?php if (tiene_permiso('banear_usuarios') && (int) $usuario['ID_Usuario'] !== (int) session()->get('id_usuario')): ?>
+                                            <?php if (($usuario['Estado_Usuario'] ?? 'Activo') === 'Baneado'): ?>
+                                                <a href="<?= base_url('usuarios/desbanear/' . $usuario['ID_Usuario']) ?>"class="btn-small"style="background:#22c55e; color:white; text-decoration:none;"> Desbanear</a>
+                                            <?php else: ?>
+                                                <a href="<?= base_url('usuarios/banear/' . $usuario['ID_Usuario']) ?>"class="btn-small btn-danger"style="text-decoration:none;"
+                                                    onclick="return confirm('¿Banear este usuario?')"> Banear
+                                                </a>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="5">No hay usuarios registrados.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
@@ -91,7 +97,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Entidad</th>
+                            <th>Título</th>
                             <th>Incidencia</th>
                             <th>Acción de Administrador</th>
                         </tr>
@@ -126,19 +132,31 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Identificador Préstamo</th>
+                            <th>Préstamo</th>
                             <th>Acción de Administrador</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>ID 4052</td>
-                            <td>
-                                <?php if(tiene_permiso('forzar_devoluciones')): ?>
-                                    <button class="btn-small btn-warning">Forzar Devolución</button>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
+                        <?php if (!empty($prestamos)): ?>
+                            <?php foreach ($prestamos as $prestamo): ?>
+                                <tr>
+                                    <td>ID <?= esc($prestamo['id_prestamo']) ?></td>
+                                    <td>
+                                        <?php if (tiene_permiso('forzar_devoluciones') && $prestamo['estado_prestamo'] !== 'Devuelto'): ?>
+                                            <a href="<?= base_url('prestamos/forzar-devolucion/' . $prestamo['id_prestamo']) ?>"class="btn-small btn-warning"style="text-decoration:none;"
+                                            onclick="return confirm('¿Forzar la devolución de este préstamo?')">Forzar Devolución
+                                            </a>
+                                        <?php else: ?>
+                                            <span class="badge borrowed">Sin acción</span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="2">No hay préstamos pendientes o activos.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>

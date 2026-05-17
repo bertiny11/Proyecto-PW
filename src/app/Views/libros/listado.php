@@ -43,7 +43,9 @@
                         <div class="card-actions">
                             <?php if (rol_actual() === 'Usuario' && session()->get('id_usuario') != $libro['id_propietario']): ?>
                                 <?php if ($libro['disponibilidad'] === 'Disponible' || $libro['disponibilidad'] == 1): ?>
-                                    <button class="btn-mockup-action success">Solicitar Préstamo</button>
+                                    <a href="<?= base_url('prestamos/solicitar/' . $libro['id_libro']) ?>" 
+                                        class="btn-mockup-action success" onclick="return confirm('¿Deseas solicitar este libro en préstamo?')">Solicitar Préstamo
+                                    </a>
                                 <?php else: ?>
                                     <button class="btn-mockup-action disabled" disabled>No Disponible</button>
                                 <?php endif; ?>

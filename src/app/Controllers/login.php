@@ -31,6 +31,12 @@ class Login extends BaseController
 
         // 3. Comprobaciones de seguridad
         if ($usuario) {
+            // Si el admin banea a un usuario ese usuario no puede entrar.
+            if (isset($usuario['Estado_Usuario']) && $usuario['Estado_Usuario'] === 'Baneado') {
+                $session->setFlashdata('error', 'Tu cuenta ha sido bloqueada por un administrador.');
+                return redirect()->to('/login');
+            }
+
             // El usuario existe. Ahora verificamos si la contraseña coincide con el hash encriptado
             if (password_verify($password, $usuario['Contrasena'])) {
                 

@@ -24,6 +24,7 @@ class UsuarioModel extends Model
         'Email', 
         'Contrasena', 
         'Rol', 
+        'Estado_Usuario',
         'Ubicacion'
     ];
 }
